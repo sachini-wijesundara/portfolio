@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FiArrowDown, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
+import Image from 'next/image';
 import { profile } from '../data/projects';
 
 export default function Hero() {
@@ -124,7 +125,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Right Column: Dynamic Graphic */}
+        {/* Right Column: Dynamic Graphic with User Photo */}
         <div className="md:col-span-5 flex justify-center items-center">
           <motion.div
             variants={itemVariants}
@@ -134,16 +135,22 @@ export default function Hero() {
             <div className="absolute inset-2 border-2 border-dashed border-primary/10 rounded-full animate-[spin_40s_linear_infinite]" />
             <div className="absolute inset-8 border border-dashed border-accent-purple/20 rounded-full animate-[spin_20s_linear_infinite_reverse]" />
             
-            {/* Inside Content: Glassmorphic Hub representing AI and Dev */}
-            <div className="w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 bg-gradient-to-tr from-dark-card to-dark-hover rounded-full overflow-hidden flex flex-col items-center justify-center p-6 border border-border/50 text-center relative group">
-              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="text-primary font-mono text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">&lt; / &gt;</div>
-              <h3 className="font-display text-text-primary text-xl font-bold mb-2">Sachini Wijesundara</h3>
-              <p className="text-text-tertiary text-xs sm:text-sm px-4">Creating solutions using Java, Flutter, Python, and AI integration.</p>
+            {/* Inside Content: Glassmorphic photo container */}
+            <div className="w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border border-border/50 relative group shadow-2xl">
+              <Image
+                src="/profile.jpg"
+                alt="Sachini Wijesundara"
+                fill
+                priority
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 768px) 100vw, 300px"
+              />
               
-              {/* Floating metrics inside the circle */}
-              <div className="absolute bottom-6 bg-dark-bg/80 border border-primary/30 rounded-full px-4 py-1 text-[10px] text-primary font-semibold tracking-wider uppercase">
-                BSc. Software Engineering
+              {/* Dynamic Overlay info on hover */}
+              <div className="absolute inset-0 bg-dark-bg/45 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="bg-dark-bg/80 border border-primary/40 rounded-xl px-4 py-2 text-xs font-bold text-primary tracking-wider uppercase">
+                  BSc. Software Engineering
+                </div>
               </div>
             </div>
           </motion.div>

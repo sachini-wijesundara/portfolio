@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FiBookOpen, FiAward, FiUsers, FiCpu } from 'react-icons/fi';
+import Image from 'next/image';
 import { profile, skills } from '../data/projects';
 
 export default function About() {
@@ -34,8 +35,68 @@ export default function About() {
 
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           
-          {/* Left Column: Profile Bio & Certifications */}
-          <div className="lg:col-span-6 space-y-8">
+          {/* Left Column: Profile Picture & Certifications (4 cols) */}
+          <div className="lg:col-span-4 space-y-8 flex flex-col items-center lg:items-stretch">
+            
+            {/* Profile Picture Card */}
+            <motion.div
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              className="bg-dark-card border border-primary/20 rounded-2xl p-4 shadow-xl box-glow w-full max-w-[320px] lg:max-w-none mx-auto overflow-hidden group"
+            >
+              <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-dark-bg">
+                <Image
+                  src="/profile.jpg"
+                  alt={profile.name}
+                  fill
+                  priority
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, 300px"
+                />
+              </div>
+              <div className="mt-4 text-center">
+                <h4 className="font-display font-bold text-text-primary text-base">{profile.name}</h4>
+                <p className="text-xs text-primary font-medium mt-1">BSc. Software Engineering (Reading)</p>
+              </div>
+            </motion.div>
+
+            {/* Certifications Card */}
+            <motion.div
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              className="bg-dark-card border border-border/30 rounded-2xl p-6 shadow-xl w-full"
+            >
+              <h3 className="text-lg font-display font-bold text-text-primary mb-5 flex items-center gap-2">
+                <FiAward className="text-primary" /> Certifications
+              </h3>
+              <div className="space-y-4">
+                {profile.certifications.map((cert, index) => (
+                  <div key={index} className="flex gap-3 items-start group">
+                    <div className="w-7 h-7 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-primary/20 transition-colors">
+                      <FiAward className="text-primary text-xs" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-semibold text-text-primary group-hover:text-primary transition-colors duration-300">
+                        {cert.title}
+                      </h4>
+                      <p className="text-[10px] text-text-tertiary">
+                        {cert.issuer} • {cert.year}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Bio, Education & Soft Skills (8 cols) */}
+          <div className="lg:col-span-8 space-y-8">
+            
+            {/* Bio Card */}
             <motion.div
               variants={cardVariants}
               initial="hidden"
@@ -61,40 +122,6 @@ export default function About() {
               </div>
             </motion.div>
 
-            {/* Certifications Card */}
-            <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              className="bg-dark-card border border-border/30 rounded-2xl p-8 shadow-xl"
-            >
-              <h3 className="text-xl font-display font-bold text-text-primary mb-6 flex items-center gap-2">
-                <FiAward className="text-primary" /> Certifications
-              </h3>
-              <div className="space-y-4">
-                {profile.certifications.map((cert, index) => (
-                  <div key={index} className="flex gap-4 items-start group">
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-primary/20 transition-colors">
-                      <FiAward className="text-primary text-sm" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors duration-300">
-                        {cert.title}
-                      </h4>
-                      <p className="text-xs text-text-tertiary">
-                        {cert.issuer} • {cert.year}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right Column: Education & Soft Skills */}
-          <div className="lg:col-span-6 space-y-8">
-            
             {/* Education Timeline */}
             <motion.div
               variants={cardVariants}
@@ -129,7 +156,7 @@ export default function About() {
               </div>
             </motion.div>
 
-            {/* Soft Skills & Academic References */}
+            {/* Soft Skills & References */}
             <motion.div
               variants={cardVariants}
               initial="hidden"
