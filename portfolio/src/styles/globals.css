@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Poppins', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+
+  --color-primary: #00D9FF;
+  --color-primary-dark: #0095A8;
+  --color-primary-light: #66E6FF;
+  
+  --color-dark-bg: #0A0E27;
+  --color-dark-card: #1A1F3A;
+  --color-dark-hover: #242D4A;
+  
+  --color-text-primary: #F5F7FB;
+  --color-text-secondary: #A8B2D1;
+  --color-text-tertiary: #6B7280;
+  
+  --color-accent-red: #FF6B6B;
+  --color-accent-teal: #4ECDC4;
+  --color-accent-gold: #FFD93D;
+  --color-accent-purple: #A78BFA;
+  
+  --color-border: #2D3748;
+  --color-border-light: #4A5568;
+}
+
+/* Base styles and defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0A0E27;
+  color: #F5F7FB;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+code {
+  font-family: 'Fira Code', monospace;
+  color: #00D9FF;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0E27;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1A1F3A;
+  border-radius: 4px;
+  border: 1px solid #2D3748;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00D9FF;
+}
+
+/* Custom animations helper classes */
+.glass-panel {
+  background: rgba(26, 31, 58, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+}
+
+.box-glow {
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.15);
+}
