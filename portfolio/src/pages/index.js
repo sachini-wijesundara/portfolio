@@ -15,7 +15,7 @@ export default function Home() {
         <title>{profile.name} | Portfolio</title>
         <meta name="description" content={`${profile.name} - ${profile.title}. Specialized in building mobile apps, web solutions, and AI integrations.`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/favicon.ico`} />
       </Head>
 
       <div className="bg-dark-bg text-text-primary min-h-screen">

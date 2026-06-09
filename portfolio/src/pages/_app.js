@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }) {
         <meta name="twitter:description" content={profile.tagline} />
 
         {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/favicon.ico`} />
       </Head>
       <Component {...pageProps} />
     </>

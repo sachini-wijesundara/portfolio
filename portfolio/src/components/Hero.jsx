@@ -315,7 +315,7 @@ export default function Hero() {
             {/* Photo */}
             <div style={{ position: 'absolute', inset: '5px', borderRadius: '50%', overflow: 'hidden' }}>
               <Image
-                src="/profile.jpg"
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/profile.jpg`}
                 alt="Sachini Wijesundara"
                 fill
                 priority
