@@ -1,82 +1,132 @@
 import { motion } from 'framer-motion';
-import { FiBookOpen, FiAward, FiUsers, FiCpu } from 'react-icons/fi';
+import { FiBookOpen, FiAward, FiUsers, FiCpu, FiMapPin, FiMail } from 'react-icons/fi';
+import { HiAcademicCap } from 'react-icons/hi2';
 import Image from 'next/image';
 import { profile, skills } from '../data/projects';
 
+const fadeUp = (delay = 0) => ({
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay } },
+});
+
 export default function About() {
-  const cardVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  };
-
   return (
-    <section id="about" className="py-24 px-6 md:px-12 bg-dark-bg border-t border-white/[0.04]">
-      <div className="max-w-5xl mx-auto">
-        
-        {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-primary mb-3">
-            About <span className="text-primary font-bold">Me</span>
-          </h2>
-          <div className="w-10 h-0.5 bg-primary mx-auto rounded-full" />
-        </div>
+    <section
+      id="about"
+      style={{
+        background: 'linear-gradient(180deg, #080C14 0%, #0D1320 100%)',
+        padding: '100px 0',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Subtle top glow */}
+      <div style={{
+        position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
+        width: '700px', height: '300px',
+        background: 'radial-gradient(ellipse, rgba(79,70,229,0.1) 0%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
+      {/* Dot grid */}
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0.35,
+        backgroundImage: 'radial-gradient(circle, rgba(99,102,241,0.1) 1px, transparent 1px)',
+        backgroundSize: '28px 28px',
+      }} />
 
-        <div className="grid lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left Column: Profile Picture & Certifications (4 cols) */}
-          <div className="lg:col-span-4 space-y-8 flex flex-col items-center lg:items-stretch">
-            
-            {/* Profile Picture Card */}
-            <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              className="bg-white/[0.01] border border-white/[0.06] rounded-2xl p-4 shadow-xl w-full max-w-[280px] lg:max-w-none mx-auto overflow-hidden group"
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 40px', position: 'relative', zIndex: 1 }}>
+
+        {/* ── Section header ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.6 }}
+          style={{ textAlign: 'center', marginBottom: '72px' }}
+        >
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: '7px',
+            fontFamily: "'Fira Code', monospace", fontSize: '11px', fontWeight: 500,
+            letterSpacing: '0.1em', textTransform: 'uppercase', color: '#818CF8',
+            padding: '5px 14px', background: 'rgba(99,102,241,0.08)',
+            border: '1px solid rgba(99,102,241,0.22)', borderRadius: '20px',
+            marginBottom: '20px',
+          }}>
+            <HiAcademicCap style={{ fontSize: '14px' }} />
+            About Me
+          </div>
+          <h2 style={{
+            fontFamily: "'Outfit', sans-serif", fontSize: '48px', fontWeight: 900,
+            color: '#F0ECFF', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '16px',
+          }}>
+            The person behind the{' '}
+            <span style={{
+              background: 'linear-gradient(135deg, #818CF8, #EC4899)',
+              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+            }}>code</span>
+          </h2>
+          <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '16px', color: '#9B94BD', maxWidth: '480px', margin: '0 auto' }}>
+            A passionate engineer who loves turning complex ideas into elegant, impactful software.
+          </p>
+        </motion.div>
+
+        {/* ── Grid layout ── */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '24px' }}>
+
+          {/* ── Left column (4 cols) ── */}
+          <div style={{ gridColumn: 'span 4', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+
+            {/* Profile photo card */}
+            <motion.div variants={fadeUp(0)} initial="hidden" whileInView="visible" viewport={{ once: true }}
+              style={{ background: 'rgba(14,20,36,0.9)', border: '1px solid rgba(99,102,241,0.18)', borderRadius: '20px', padding: '16px', overflow: 'hidden' }}
             >
-              <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-neutral-900">
-                <Image
-                  src="/profile.jpg"
-                  alt={profile.name}
-                  fill
-                  className="object-cover group-hover:scale-103 transition-transform duration-500"
-                  sizes="(max-width: 768px) 100vw, 300px"
-                />
+              <div style={{ position: 'relative', width: '100%', aspectRatio: '1/1', borderRadius: '14px', overflow: 'hidden', background: '#111B2E' }}>
+                <Image src="/profile.jpg" alt={profile.name} fill style={{ objectFit: 'cover' }} sizes="350px" />
+                {/* Gradient overlay */}
+                <div style={{
+                  position: 'absolute', bottom: 0, left: 0, right: 0, height: '55%',
+                  background: 'linear-gradient(to top, rgba(10,16,28,0.95), transparent)',
+                }} />
+                <div style={{ position: 'absolute', bottom: '16px', left: '16px', right: '16px' }}>
+                  <p style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: '17px', color: '#F0ECFF' }}>{profile.name}</p>
+                  <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '12px', color: '#818CF8', marginTop: '2px' }}>Plymouth BSc (Hons) · Reading</p>
+                </div>
               </div>
-              <div className="mt-4 text-center lg:text-left px-1">
-                <h4 className="font-display font-bold text-text-primary text-sm">{profile.name}</h4>
-                <p className="text-[11px] text-zinc-400 mt-1 font-medium">Plymouth BSc (Hons) Reading</p>
+              {/* Info chips */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginTop: '14px' }}>
+                {[
+                  { icon: FiMapPin, text: profile.location?.split(',')[0] || 'Sri Lanka', color: '#818CF8' },
+                  { icon: FiMail, text: 'Email me', color: '#EC4899', href: `mailto:${profile.email}` },
+                ].map(({ icon: Icon, text, color, href }) => {
+                  const Tag = href ? 'a' : 'div';
+                  return (
+                    <Tag key={text} href={href} style={{
+                      display: 'flex', alignItems: 'center', gap: '6px', padding: '9px 12px',
+                      background: 'rgba(99,102,241,0.05)', border: '1px solid rgba(99,102,241,0.12)',
+                      borderRadius: '10px', textDecoration: 'none', cursor: href ? 'pointer' : 'default',
+                    }}>
+                      <Icon style={{ color, flexShrink: 0, fontSize: '13px' }} />
+                      <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '11px', color: '#9B94BD', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{text}</span>
+                    </Tag>
+                  );
+                })}
               </div>
             </motion.div>
 
-            {/* Certifications Card */}
-            <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              className="bg-white/[0.01] border border-white/[0.06] rounded-2xl p-6 shadow-xl w-full"
+            {/* Certifications card */}
+            <motion.div variants={fadeUp(0.1)} initial="hidden" whileInView="visible" viewport={{ once: true }}
+              style={{ background: 'rgba(14,20,36,0.9)', border: '1px solid rgba(99,102,241,0.15)', borderRadius: '20px', padding: '24px' }}
             >
-              <h3 className="text-base font-display font-bold text-text-primary mb-5 flex items-center gap-2">
-                <FiAward className="text-primary" /> Certifications
+              <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '15px', fontWeight: 700, color: '#F0ECFF', marginBottom: '18px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <FiAward style={{ color: '#FBBF24' }} /> Certifications
               </h3>
-              <div className="space-y-4">
-                {profile.certifications.map((cert, index) => (
-                  <div key={index} className="flex gap-3 items-start group">
-                    <div className="w-6.5 h-6.5 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <FiAward className="text-primary text-xs" />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                {profile.certifications.map((cert, i) => (
+                  <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                    <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: 'rgba(251,191,36,0.08)', border: '1px solid rgba(251,191,36,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <FiAward style={{ color: '#FBBF24', fontSize: '12px' }} />
                     </div>
                     <div>
-                      <h4 className="text-xs font-semibold text-text-primary group-hover:text-primary transition-colors duration-200">
-                        {cert.title}
-                      </h4>
-                      <p className="text-[10px] text-zinc-500 mt-0.5 font-medium">
-                        {cert.issuer} • {cert.year}
-                      </p>
+                      <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '12px', fontWeight: 600, color: '#F0ECFF', lineHeight: 1.4 }}>{cert.title}</p>
+                      <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '10px', color: '#5B5480', marginTop: '2px' }}>{cert.issuer} · {cert.year}</p>
                     </div>
                   </div>
                 ))}
@@ -84,108 +134,107 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Right Column: Bio, Education & Soft Skills (8 cols) */}
-          <div className="lg:col-span-8 space-y-8">
-            
-            {/* Bio Card */}
-            <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              className="bg-white/[0.01] border border-white/[0.06] rounded-2xl p-8 shadow-xl"
+          {/* ── Right column (8 cols) ── */}
+          <div style={{ gridColumn: 'span 8', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+
+            {/* Bio card */}
+            <motion.div variants={fadeUp(0.15)} initial="hidden" whileInView="visible" viewport={{ once: true }}
+              style={{ background: 'rgba(14,20,36,0.9)', border: '1px solid rgba(99,102,241,0.15)', borderRadius: '20px', padding: '32px' }}
             >
-              <h3 className="text-lg font-display font-bold text-text-primary mb-4 flex items-center gap-2">
-                <FiCpu className="text-primary" /> My Background
+              <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '16px', fontWeight: 700, color: '#F0ECFF', marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <FiCpu style={{ color: '#818CF8' }} /> My Background
               </h3>
-              <p className="text-zinc-400 leading-relaxed mb-6 text-sm font-normal">
-                {profile.bio}
-              </p>
-              <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/[0.06]">
-                <div>
-                  <h4 className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1 font-semibold">Location</h4>
-                  <p className="text-xs font-semibold text-text-primary">{profile.location}</p>
-                </div>
-                <div>
-                  <h4 className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1 font-semibold">Email</h4>
-                  <a href={`mailto:${profile.email}`} className="text-xs font-semibold text-primary hover:text-primary-light transition-colors break-all">{profile.email}</a>
+              <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '14px', color: '#9B94BD', lineHeight: 1.75 }}>{profile.bio}</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '20px' }}>
+                {['Flutter', 'Next.js', 'AI/ML', 'Firebase', 'REST APIs', 'Agile', 'React', 'Python'].map((tag) => (
+                  <span key={tag} style={{
+                    fontFamily: "'Fira Code', monospace", fontSize: '11px', padding: '4px 10px',
+                    background: 'rgba(99,102,241,0.07)', border: '1px solid rgba(99,102,241,0.18)',
+                    borderRadius: '6px', color: '#818CF8',
+                  }}>{tag}</span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Education */}
+            <motion.div variants={fadeUp(0.2)} initial="hidden" whileInView="visible" viewport={{ once: true }}
+              style={{ background: 'rgba(14,20,36,0.9)', border: '1px solid rgba(99,102,241,0.15)', borderRadius: '20px', padding: '32px' }}
+            >
+              <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '16px', fontWeight: 700, color: '#F0ECFF', marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <FiBookOpen style={{ color: '#22D3EE' }} /> Education
+              </h3>
+              <div style={{ position: 'relative', paddingLeft: '28px' }}>
+                {/* Timeline line */}
+                <div style={{
+                  position: 'absolute', left: '9px', top: '8px', bottom: '8px', width: '1px',
+                  background: 'linear-gradient(to bottom, rgba(99,102,241,0.6), rgba(236,72,153,0.3), transparent)',
+                }} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+                  {profile.education.map((edu, i) => (
+                    <div key={i} style={{ position: 'relative' }}>
+                      {/* Dot */}
+                      <div style={{
+                        position: 'absolute', left: '-23px', top: '2px', width: '22px', height: '22px',
+                        borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        background: i === 0 ? 'linear-gradient(135deg, #4F46E5, #DB2777)' : 'rgba(30,26,58,1)',
+                        border: i === 0 ? 'none' : '1px solid rgba(99,102,241,0.3)',
+                      }}>
+                        <HiAcademicCap style={{ fontSize: '11px', color: i === 0 ? '#fff' : '#9B94BD' }} />
+                      </div>
+                      <span style={{
+                        fontFamily: "'Fira Code', monospace", fontSize: '9px', fontWeight: 700,
+                        textTransform: 'uppercase', letterSpacing: '0.1em', color: '#818CF8',
+                        padding: '3px 8px', background: 'rgba(99,102,241,0.08)',
+                        border: '1px solid rgba(99,102,241,0.2)', borderRadius: '6px',
+                        display: 'inline-block', marginBottom: '6px',
+                      }}>{edu.period}</span>
+                      <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '15px', fontWeight: 700, color: '#F0ECFF' }}>{edu.degree}</p>
+                      <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '13px', color: '#818CF8', marginTop: '2px', fontWeight: 600 }}>{edu.institution}</p>
+                      <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '12px', color: '#5B5480', marginTop: '6px', lineHeight: 1.6 }}>{edu.details}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </motion.div>
 
-            {/* Education Timeline */}
-            <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              className="bg-white/[0.01] border border-white/[0.06] rounded-2xl p-8 shadow-xl"
+            {/* Soft Skills + Reference */}
+            <motion.div variants={fadeUp(0.25)} initial="hidden" whileInView="visible" viewport={{ once: true }}
+              style={{ background: 'rgba(14,20,36,0.9)', border: '1px solid rgba(99,102,241,0.15)', borderRadius: '20px', padding: '32px' }}
             >
-              <h3 className="text-lg font-display font-bold text-text-primary mb-6 flex items-center gap-2">
-                <FiBookOpen className="text-primary" /> Education
+              <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '16px', fontWeight: 700, color: '#F0ECFF', marginBottom: '18px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <FiUsers style={{ color: '#EC4899' }} /> Soft Skills
               </h3>
-              <div className="relative pl-5 border-l border-white/[0.08] space-y-8 ml-2">
-                {profile.education.map((edu, index) => (
-                  <div key={index} className="relative">
-                    {/* Timeline Node dot */}
-                    <div className="absolute -left-[25px] top-1.5 w-2.5 h-2.5 rounded-full bg-dark-bg border border-primary" />
-                    
-                    <span className="inline-block text-[9px] font-bold tracking-wider text-primary uppercase bg-primary/10 px-2 py-0.5 rounded mb-2">
-                      {edu.period}
-                    </span>
-                    <h4 className="text-sm sm:text-base font-bold text-text-primary">
-                      {edu.degree}
-                    </h4>
-                    <h5 className="text-xs sm:text-sm font-semibold text-zinc-400 mt-0.5">
-                      {edu.institution}
-                    </h5>
-                    <p className="text-[11px] sm:text-xs text-zinc-500 mt-2 font-medium">
-                      {edu.details}
-                    </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
+                {skills.soft.map((skill, i) => (
+                  <span key={i} style={{
+                    fontFamily: "'Space Grotesk', sans-serif", fontSize: '12px', padding: '6px 14px',
+                    background: 'rgba(236,72,153,0.06)', border: '1px solid rgba(236,72,153,0.15)',
+                    borderRadius: '8px', color: '#9B94BD', cursor: 'default',
+                  }}>{skill}</span>
+                ))}
+              </div>
+              <div style={{ borderTop: '1px solid rgba(99,102,241,0.1)', paddingTop: '24px' }}>
+                <p style={{ fontFamily: "'Fira Code', monospace", fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#5B5480', marginBottom: '14px' }}>Academic Reference</p>
+                {profile.references.map((ref, i) => (
+                  <div key={i} style={{ padding: '16px', background: 'rgba(99,102,241,0.04)', border: '1px solid rgba(99,102,241,0.1)', borderRadius: '12px' }}>
+                    <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '14px', fontWeight: 700, color: '#F0ECFF' }}>{ref.name}</p>
+                    <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '12px', color: '#9B94BD', marginTop: '2px' }}>{ref.role} — {ref.institution}</p>
+                    <a href={`mailto:${ref.contact}`} style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '12px', color: '#818CF8', display: 'inline-block', marginTop: '6px', fontWeight: 600, textDecoration: 'none' }}>{ref.contact}</a>
                   </div>
                 ))}
               </div>
             </motion.div>
-
-            {/* Soft Skills */}
-            <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              className="bg-white/[0.01] border border-white/[0.06] rounded-2xl p-8 shadow-xl"
-            >
-              <h3 className="text-lg font-display font-bold text-text-primary mb-5 flex items-center gap-2">
-                <FiUsers className="text-primary" /> Soft Skills
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {skills.soft.map((skill, index) => (
-                  <span
-                    key={index}
-                    className="text-xs px-3 py-1.5 bg-white/[0.02] border border-white/[0.04] text-zinc-400 hover:text-white rounded-lg cursor-default transition-all duration-200"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-
-              {/* Reference */}
-              <div className="pt-6 border-t border-white/[0.06] mt-6">
-                <h4 className="text-[10px] text-zinc-500 uppercase tracking-wider mb-3 font-semibold">Academic Reference</h4>
-                {profile.references.map((ref, index) => (
-                  <div key={index} className="bg-white/[0.01] border border-white/[0.04] rounded-xl p-4">
-                    <p className="text-xs sm:text-sm font-bold text-text-primary">{ref.name}</p>
-                    <p className="text-[10px] sm:text-xs text-zinc-400 mt-0.5">{ref.role} — {ref.institution}</p>
-                    <a href={`mailto:${ref.contact}`} className="text-[10px] sm:text-xs font-semibold text-primary hover:underline mt-1.5 inline-block">{ref.contact}</a>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
           </div>
         </div>
-
       </div>
+
+      {/* Responsive override */}
+      <style jsx global>{`
+        @media (max-width: 900px) {
+          #about .about-grid > div:first-child { grid-column: span 12 !important; }
+          #about .about-grid > div:last-child { grid-column: span 12 !important; }
+        }
+      `}</style>
     </section>
   );
 }
