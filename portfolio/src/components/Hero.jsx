@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiGithub, FiLinkedin, FiMail, FiArrowDown, FiDownload } from 'react-icons/fi';
 import { HiSparkles } from 'react-icons/hi2';
-import Image from 'next/image';
 import Link from 'next/link';
 import { profile } from '../data/projects';
 
@@ -313,14 +312,11 @@ export default function Hero() {
             </div>
 
             {/* Photo */}
-            <div style={{ position: 'absolute', inset: '5px', borderRadius: '50%', overflow: 'hidden' }}>
-              <Image
+            <div style={{ position: 'absolute', inset: '5px', borderRadius: '50%', overflow: 'hidden', zIndex: 2 }}>
+              <img
                 src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/profile.jpg`}
                 alt="Sachini Wijesundara"
-                fill
-                priority
-                style={{ objectFit: 'cover' }}
-                sizes="270px"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
 

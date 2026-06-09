@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { FiBookOpen, FiAward, FiUsers, FiCpu, FiMapPin, FiMail } from 'react-icons/fi';
 import { HiAcademicCap } from 'react-icons/hi2';
-import Image from 'next/image';
 import { profile, skills } from '../data/projects';
 
 const fadeUp = (delay = 0) => ({
@@ -79,7 +78,11 @@ export default function About() {
               style={{ background: 'rgba(14,20,36,0.9)', border: '1px solid rgba(99,102,241,0.18)', borderRadius: '20px', padding: '16px', overflow: 'hidden' }}
             >
               <div style={{ position: 'relative', width: '100%', aspectRatio: '1/1', borderRadius: '14px', overflow: 'hidden', background: '#111B2E' }}>
-                <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/profile.jpg`} alt={profile.name} fill style={{ objectFit: 'cover' }} sizes="350px" />
+                <img
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/profile.jpg`}
+                  alt={profile.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
                 {/* Gradient overlay */}
                 <div style={{
                   position: 'absolute', bottom: 0, left: 0, right: 0, height: '55%',
